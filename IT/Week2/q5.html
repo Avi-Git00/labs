@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Color Picker</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        #colorPicker {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+        }
+
+        #selectedColor {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="colorPicker"></div>
+    <div id="selectedColor">Selected Color: <span id="colorValue">#000000</span></div>
+
+    <script>
+        const colorPicker = document.getElementById('colorPicker');
+        const selectedColor = document.getElementById('colorValue');
+
+        // Initialize color picker
+        const spectrum = new iro.ColorPicker(colorPicker, {
+            width: 200,
+            color: "#000000"
+        });
+
+        // Event listener for color changes
+        spectrum.on('color:change', function(color) {
+            const hexColor = color.hexString;
+            selectedColor.textContent = hexColor;
+            colorPicker.style.backgroundColor = hexColor;
+        });
+    </script>
+
+    <!-- Include the iro.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/iro.js"></script>
+</body>
+</html>

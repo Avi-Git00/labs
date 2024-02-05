@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>Greetings and Clock</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        #greeting {
+            font-size: 24px;
+            margin-top: 50px;
+        }
+
+        #clock {
+            font-size: 36px;
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="greeting"></div>
+    <div id="clock"></div>
+
+    <script>
+        function getGreeting() {
+            var date = new Date();
+            var hours = date.getHours();
+
+            var greeting;
+            if (hours >= 5 && hours < 12) {
+                greeting = 'Good morning!';
+            } else if (hours >= 12 && hours < 18) {
+                greeting = 'Good afternoon!';
+            } else {
+                greeting = 'Good evening!';
+            }
+
+            return greeting;
+        }
+
+        function updateClock() {
+            var date = new Date();
+            var hours = addZero(date.getHours());
+            var minutes = addZero(date.getMinutes());
+            var seconds = addZero(date.getSeconds());
+
+            var currentTime = hours + ':' + minutes + ':' + seconds;
+
+            document.getElementById('greeting').innerHTML = getGreeting();
+            document.getElementById('clock').innerHTML = currentTime;
+
+            setTimeout(updateClock, 1000); // Update every second
+        }
+
+        function addZero(number) {
+            return (number < 10 ? '0' : '') + number;
+        }
+
+        window.onload = function() {
+            updateClock(); // Initial call to display clock
+        };
+    </script>
+</body>
+</html>

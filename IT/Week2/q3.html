@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Rain Animation</title>
+
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="rainCanvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('rainCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Set canvas size to cover the entire window
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Array to store raindrops
+        const raindrops = [];
+
+        // Function to generate a random number in a range
+        function getRandom(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        // Create a raindrop object
+        function createRaindrop() {
+            return {
+                x: getRandom(0, canvas.width),
+                y: getRandom(0, canvas.height),
+                length: getRandom(5, 20),
+                speed: getRandom(2, 5)
+            };
+        }
+
+        // Initialize raindrops
+        for (let i = 0; i < 100; i++) {
+            raindrops.push(createRaindrop());
+        }
+
+        // Function to draw a raindrop
+        function drawRaindrop(raindrop) {
+            ctx.beginPath();
+            ctx.moveTo(raindrop.x, raindrop.y);
+            ctx.lineTo(raindrop.x, raindrop.y + raindrop.length);
+            ctx.strokeStyle = '#00F'; // Blue color
+            ctx.stroke();
+        }
+
+        // Function to update the animation
+        function update() {
+            // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Move and draw each raindrop
+            for (let i = 0; i < raindrops.length; i++) {
+                const raindrop = raindrops[i];
+                raindrop.y += raindrop.speed;
+
+                // If a raindrop goes off the screen, reset its position
+                if (raindrop.y > canvas.height) {
+                    raindrop.y = 0;
+                    raindrop.x = getRandom(0, canvas.width);
+                }
+
+                drawRaindrop(raindrop);
+            }
+
+            // Repeat the update function
+            requestAnimationFrame(update);
+        }
+
+        // Start the animation
+        update();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>

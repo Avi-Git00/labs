@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>Bouncing Ball Animation</title>
+
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #ball {
+            width: 50px;
+            height: 50px;
+            background-color: #f00; /* Red color */
+            position: absolute;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="ball"></div>
+
+    <script>
+        const ball = document.getElementById('ball');
+
+        let positionX = 50; // Initial X position
+        let positionY = 50; // Initial Y position
+        let speedX = 5;     // Initial X speed
+        let speedY = 2;     // Initial Y speed
+
+        // Function to update the position of the ball
+        function updateBall() {
+            positionX += speedX;
+            positionY += speedY;
+
+            // Check if the ball hits the edges of the window
+            if (positionX + ball.clientWidth > window.innerWidth || positionX < 0) {
+                speedX = -speedX; // Reverse the X direction
+            }
+
+            if (positionY + ball.clientHeight > window.innerHeight || positionY < 0) {
+                speedY = -speedY; // Reverse the Y direction
+            }
+
+            // Update the position of the ball
+            ball.style.left = positionX + 'px';
+            ball.style.top = positionY + 'px';
+
+            // Repeat the update function
+            requestAnimationFrame(updateBall);
+        }
+
+        // Start the animation
+        updateBall();
+    </script>
+</body>
+</html>

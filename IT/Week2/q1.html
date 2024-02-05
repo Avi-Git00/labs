@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Get Element Position</title>
+
+    <style>
+        /* Add some styling for demonstration purposes */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #targetElement {
+            width: 100px;
+            height: 100px;
+            background-color: lightblue;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="targetElement">This is the target element</div>
+
+    <script>
+        // JavaScript function to get the position of an element
+        function getElementPosition() {
+            // Get the target element
+            var targetElement = document.getElementById('targetElement');
+
+            // Get the position of the element
+            var position = {
+                top: targetElement.offsetTop,
+                left: targetElement.offsetLeft
+            };
+
+            // Display the position information
+            alert('Top position: ' + position.top + 'px\nLeft position: ' + position.left + 'px');
+        }
+
+        // Call the function when the page is fully loaded
+        window.onload = function() {
+            getElementPosition();
+        };
+    </script>
+</body>
+</html>
